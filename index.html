@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-geo@3.0.0/build/index.umd.min.js"></script>
+    <title>BAI</title>
+</head>
+
+<body>
+    <div >
+        <canvas id="canvas" style="border: 1px solid black"></canvas>
+    </div>
+
+    <script>
+        fetch('./pol.topo.json')
+            .then((r) => r.json())
+            .then((data) => {
+                const poland = ChartGeo.topojson.feature(data, data.objects.pol).features;
+
+                const chart = new Chart(document.getElementById('canvas').getContext('2d'), {
+                    type: 'choropleth',
+                    data: {
+                        labels: poland.map((d) => d.properties.name),
+                        datasets: [{
+                            label: 'Countries',
+                            outline: poland,
+                            data: poland.map((d) => ({
+                                feature: d,
+                                value: Math.random()*10000,
+                            })),
+                        }, ],
+                    },
+                    options: {
+                        showOutline: true,
+                        'onClick' : (evt, item) => { console.log(item[0])   },
+                        plugins: {
+                            legend: {
+                                display: false,
+                            },
+                        },
+                        scales: {
+                            xy: {
+                               projection: 'mercator',
+                            },
+                        },
+                    },
+                });
+            });
+    </script>
+</body>
+
+</html>
