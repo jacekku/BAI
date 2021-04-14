@@ -1,0 +1,39 @@
+/* Global Stylesheet */
+@import url('https://fonts.googleapis.com/css2?family=Hind:wght@300&display=swap');
+
+:root {
+  --black: #1f1f1f;
+  --font: 'Hind', Helvetica, sans-serif;
+}
+
+#app {
+  font-family: var(--font);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: var(--black);
+}
+
+h1 {
+  font-size: 36px;
+}
+
+a {
+  color: unset;
+}
+a:hover {
+  color: unset;
+  text-decoration: unset;
+}
+
+.page-wrap {
+  opacity: 0;
+  transition: 0.4s;
+}
+.page-wrap.loaded {
+  opacity: 1 !important;
+}
+
+.main {
+  padding-top: 50px;
+}
