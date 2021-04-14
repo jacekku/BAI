@@ -1,11 +1,24 @@
-# Bogate Aplikacje Internetowe
+# bai
 
-## Projekt opisu paczek internetowych
+## Project setup
+```
+npm install
+```
 
-użycie mockaroo
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
 
-### Mapa Polski
+### Compiles and minifies for production
+```
+npm run build
+```
 
-źródło danych: https://github.com/markmarkoh/datamaps/blob/master/src/js/data/pol.topo.json \
-biblioteka map: https://github.com/sgratzl/chartjs-chart-geo \
-nadrzędna biblioteka do rysowania wykresów: https://www.chartjs.org/
+### Lints and fixes files
+```
+npm run lint
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
