@@ -3,6 +3,7 @@
     <Navbar></Navbar>
     <div class="main">
       <h1>przesyłki</h1>
+      <h2>Wojewodztwo: {{ $route.params.name }}</h2>
     </div>
   </section>
 </template>

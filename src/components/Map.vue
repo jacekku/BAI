@@ -9,28 +9,23 @@
 import { LMap, LTileLayer, LGeoJson } from 'vue2-leaflet'
 
 function onEachFeature(feature, layer) {
-  layer.on('mouseover', function (e) {
+  layer.on('mouseover', (e) => {
     e.target.setStyle({
       color: '#FF0000',
     })
   })
-  layer.on('mouseout', function (e) {
+  layer.on('mouseout', (e) => {
     e.target.setStyle({
       color: '#493afc',
     })
   })
-  layer.on('click', function () {
-    console.log(feature)
-    //przenieś na strone feature.id albo feature.properties.id - pierwsze liczone od 0, drugie od 1
+  layer.on('click', () => {
+    this.$router.push(`przesyłki/${feature.properties.nazwa}`)
   })
-  layer.bindTooltip(
-    `<div>
-  <div>${feature.properties.nazwa}</div>
-  <div>${feature.id}</div>
-  <div>${feature.properties.id}</div>
-  </div>`,
-    { permanent: false, sticky: true }
-  )
+  layer.bindTooltip(`<div>${feature.properties.nazwa}</div>`, {
+    permanent: false,
+    sticky: true,
+  })
 }
 
 export default {

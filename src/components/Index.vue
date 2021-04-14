@@ -2,18 +2,20 @@
   <section>
     <Navbar></Navbar>
     <div class="main">
-      <h1>index</h1>
+      <Map />
     </div>
   </section>
 </template>
 
 <script>
 import Navbar from './Navbar'
+import Map from './Map'
 
 export default {
   name: 'Index',
   components: {
-    Navbar: Navbar,
+    Navbar,
+    Map,
   },
 }
 </script>
