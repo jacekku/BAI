@@ -10,10 +10,13 @@
   "dependencies": {
     "bootstrap": "^4.6.0",
     "bootstrap-vue": "^2.21.2",
+    "chart.js": "^3.1.1",
     "core-js": "^3.6.5",
     "leaflet": "^1.7.1",
     "vue": "^2.6.12",
+    "vue-chartjs3": "^1.0.8",
     "vue-router": "^3.5.1",
+    "vue-spinners": "^1.0.2",
     "vue2-leaflet": "^2.7.0"
   },
   "devDependencies": {
