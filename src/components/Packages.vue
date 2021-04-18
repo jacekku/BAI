@@ -2,36 +2,40 @@
   <section>
     <Navbar></Navbar>
     <div class="main">
-      <div class="container-fluid datatable-wrap">
-        <h1 v-if="$route.params.name === 'all'">Dane przesyłek</h1>
-        <h1 v-else>Województwo {{ $route.params.name }} - Dane przesyłek</h1>
-        <b-row>
-          <b-col md="3">
-            <b-form-input
-              v-model="filter"
-              type="search"
-              placeholder="Wyszukaj"
-            ></b-form-input>
-          </b-col>
-        </b-row>
-        <b-row>
-          <b-col>
-            <b-table
-              striped
-              hover
-              :items="packages"
-              :filter="filter"
-              :per-page="perPage"
-              :current-page="currentPage"
-            ></b-table>
-            <b-pagination
-              v-if="packages.length > 0"
-              v-model="currentPage"
-              :total-rows="packages.length"
-              :perPage="perPage"
-            ></b-pagination>
-          </b-col>
-        </b-row>
+      <div class="container-fluid content-wrap">
+        <div class="content">
+          <h1 v-if="$route.params.name === 'all'">Dane przesyłek</h1>
+          <h1 v-else>Dane przesyłek - województwo {{ $route.params.name }}</h1>
+          <b-row>
+            <b-col md="3">
+              <b-form-input
+                v-model="filter"
+                type="search"
+                placeholder="Szukaj w przesyłkach"
+                class="datatable-search"
+              ></b-form-input>
+            </b-col>
+          </b-row>
+
+          <b-row>
+            <b-col>
+              <b-table
+                striped
+                hover
+                :items="packages"
+                :filter="filter"
+                :per-page="perPage"
+                :current-page="currentPage"
+              ></b-table>
+              <b-pagination
+                v-if="packages.length > 0"
+                v-model="currentPage"
+                :total-rows="packages.length"
+                :perPage="perPage"
+              ></b-pagination>
+            </b-col>
+          </b-row>
+        </div>
       </div>
     </div>
   </section>

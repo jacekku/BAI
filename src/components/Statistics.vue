@@ -1,18 +1,21 @@
 <template>
   <section>
     <Navbar></Navbar>
-    <div class="main">
-      <h1>statystyki</h1>
-      <h2>Ilość paczek wysłana i otrzymana w poszczególnych miesiącach</h2>
-      <SentReceivedPerMonth
-        :data="dataSentReceived"
-        :loaded="loadedSentReceived"
-      />
-      <h2>Ilość paczek przetworzona przez spedytorów</h2>
-      <PackagePerShipper
-        :data="dataPackagePerShipper"
-        :loaded="loadedPackagePerShipper"
-      />
+    <div class="main content-wrap">
+      <div class="content">
+        <h2 class="stats-header">
+          Ilość paczek wysłana i otrzymana w poszczególnych miesiącach
+        </h2>
+        <SentReceivedPerMonth
+          :data="dataSentReceived"
+          :loaded="loadedSentReceived"
+        />
+        <h2 class="stats-header">Ilość paczek przetworzona przez spedytorów</h2>
+        <PackagePerShipper
+          :data="dataPackagePerShipper"
+          :loaded="loadedPackagePerShipper"
+        />
+      </div>
     </div>
   </section>
 </template>
@@ -88,7 +91,7 @@ export default {
   methods: {
     handleSentReceivedPerMonth(data) {
       const mappedData = data
-        .map((data) => {
+        .map(data => {
           return {
             dispatch: new Date(data.dispatch).getMonth(),
             arrival: new Date(data.arrival).getMonth(),
@@ -126,14 +129,14 @@ export default {
       this.dataPackagePerShipper.labels = Array.from(mappedData.shippers)
       this.dataPackagePerShipper.datasets[0].data = Array.from(
         mappedData.shippers,
-        (shipper) => mappedData.data[shipper]
+        shipper => mappedData.data[shipper]
       )
       this.loadedPackagePerShipper = true
     },
     loadData() {
       fetch('https://my.api.mockaroo.com/dispatch_data.json?key=3fdd6730')
-        .then((data) => data.json())
-        .then((data) => {
+        .then(data => data.json())
+        .then(data => {
           this.handleSentReceivedPerMonth(data)
           this.handlePackagesPerShipper(data)
         })
