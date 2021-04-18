@@ -16,17 +16,17 @@
             ><router-link to="/">Strona Główna</router-link></b-nav-item
           >
           <b-nav-item
-            ><router-link to="przesyłki"
+            ><router-link to="/przesyłki/all"
               >Wszystkie paczki</router-link
             ></b-nav-item
           >
           <b-nav-item
-            ><router-link to="koszt"
+            ><router-link to="/koszt"
               >Oblicz koszt wysyłki</router-link
             ></b-nav-item
           >
           <b-nav-item
-            ><router-link to="statystyki">Statystyki</router-link></b-nav-item
+            ><router-link to="/statystyki">Statystyki</router-link></b-nav-item
           >
         </b-navbar-nav>
       </b-collapse>
