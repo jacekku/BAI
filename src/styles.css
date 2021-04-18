@@ -16,6 +16,7 @@
 
 h1 {
   font-size: 36px;
+  margin-bottom: 40px;
 }
 
 a {
@@ -36,4 +37,27 @@ a:hover {
 
 .main {
   padding-top: 50px;
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+  max-width: 80%;
+}
+
+.content.map {
+  height: 350px;
+}
+
+.leaflet-interactive {
+  stroke: #4e3ea7;
+}
+
+.leaflet-interactive:hover {
+  fill: rgb(73, 58, 252, 0.6);
+  transition: 0.4s;
+}
+
+.datatable-wrap {
+  max-width: 80%;
 }

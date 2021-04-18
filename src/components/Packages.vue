@@ -2,9 +2,9 @@
   <section>
     <Navbar></Navbar>
     <div class="main">
-      <div class="container-fluid">
-        <h1>przesyłki</h1>
-        <h2>Wojewodztwo: {{ $route.params.name }}</h2>
+      <div class="container-fluid datatable-wrap">
+        <h1 v-if="$route.params.name === 'all'">Dane przesyłek</h1>
+        <h1 v-else>Województwo {{ $route.params.name }} - Dane przesyłek</h1>
         <b-row>
           <b-col md="3">
             <b-form-input
@@ -55,21 +55,21 @@ export default {
     }
   },
   watch: {
-    '$route.params.name': function () {
+    '$route.params.name': function() {
       this.showTable()
-    }
+    },
   },
   mounted() {
     this.showTable()
   },
   methods: {
     showTable() {
-    fetch('https://my.api.mockaroo.com/dispatch_data/.json?key=646a4130')
-      .then((fetchedData) => fetchedData.json())
-      .then(
-        (fetchedData) => (this.packages = fetchedData.filter(this.checkState))
-      )
-      .catch((err) => console.log(err.message))
+      fetch('https://my.api.mockaroo.com/dispatch_data/.json?key=646a4130')
+        .then(fetchedData => fetchedData.json())
+        .then(
+          fetchedData => (this.packages = fetchedData.filter(this.checkState))
+        )
+        .catch(err => console.log(err.message))
     },
     checkState(item) {
       return this.$route.params.name == 'all'

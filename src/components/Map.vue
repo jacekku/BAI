@@ -1,5 +1,5 @@
 <template>
-  <l-map style="height: 350px" :zoom="zoom" :center="center">
+  <l-map style="height: 700px;" :zoom="zoom" :center="center">
     <l-tile-layer :url="url"></l-tile-layer>
     <l-geo-json :geojson="geojson" :options="options"></l-geo-json>
   </l-map>
@@ -9,16 +9,6 @@
 import { LMap, LTileLayer, LGeoJson } from 'vue2-leaflet'
 
 function onEachFeature(feature, layer) {
-  layer.on('mouseover', (e) => {
-    e.target.setStyle({
-      color: '#FF0000',
-    })
-  })
-  layer.on('mouseout', (e) => {
-    e.target.setStyle({
-      color: '#493afc',
-    })
-  })
   layer.on('click', () => {
     this.$router.push(`przesyłki/${feature.properties.nazwa}`)
   })
@@ -38,7 +28,7 @@ export default {
   data() {
     return {
       url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-      zoom: 5,
+      zoom: 6,
       center: [51.919438, 19.145136],
       geojson: null,
       options: {

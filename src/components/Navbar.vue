@@ -12,9 +12,7 @@
       <b-collapse id="nav-collapse" is-nav>
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
-          <b-nav-item
-            ><router-link to="/">Strona Główna</router-link></b-nav-item
-          >
+          <b-nav-item><router-link to="/">Mapa</router-link></b-nav-item>
           <b-nav-item
             ><router-link to="/przesyłki/all"
               >Wszystkie paczki</router-link
