@@ -5,7 +5,7 @@
       <div class="content">
         <div class="stats-wrap">
           <h2 class="stats-header">
-            Ilość paczek wysłana i otrzymana w poszczególnych miesiącach
+            Ilość paczek wysłana i otrzymana w poszczególnych województwach
           </h2>
           <SentReceivedPerMonth
             :data="dataSentReceived"
@@ -45,26 +45,14 @@ export default {
     PackagePerShipper,
   },
   mounted() {
-    this.loadData()
+    this.loadDataVoivodeship()
+    this.loadDataShipper()
   },
   data() {
     return {
       loadedSentReceived: false,
       dataSentReceived: {
-        labels: [
-          'Styczeń',
-          'Luty',
-          'Marzec',
-          'Kwiecień',
-          'Maj',
-          'Czerwiec',
-          'Lipiec',
-          'Sierpień',
-          'Wrzesień',
-          'Październik',
-          'Listopad',
-          'Grudzień',
-        ],
+        labels: [],
         datasets: [
           {
             label: 'Wysłane',
@@ -83,7 +71,7 @@ export default {
         labels: Array.from({ length: 5 }).fill('Spedytor'),
         datasets: [
           {
-            label: 'ASDDD',
+            label: 'default',
             data: [11, 16, 7, 3, 14],
             backgroundColor: [
               'rgb(255, 99, 132)',
@@ -104,54 +92,39 @@ export default {
   },
   methods: {
     handleSentReceivedPerMonth(data) {
-      const mappedData = data
-        .map(data => {
-          return {
-            dispatch: new Date(data.dispatch).getMonth(),
-            arrival: new Date(data.arrival).getMonth(),
-          }
-        })
-        .reduce(
-          (acc, current) => {
-            acc.dispatchCount[current.dispatch] += 1
-            acc.arrivalCount[current.arrival] += 1
-            return acc
-          },
-          {
-            dispatchCount: new Array(12).fill(0),
-            arrivalCount: new Array(12).fill(0),
-          }
-        )
-      this.dataSentReceived.datasets[0].data = mappedData.dispatchCount
-      this.dataSentReceived.datasets[1].data = mappedData.arrivalCount
+      const states = Array.from(data.map((d) => d.state))
+
+      this.dataSentReceived.labels = states
+      this.dataSentReceived.datasets[0].data = states.map((state) => {
+        const stateObj = data.find((obj) => obj.state == state)
+        return stateObj.dispatch
+      })
+      this.dataSentReceived.datasets[1].data = states.map((state) => {
+        const stateObj = data.find((obj) => obj.state == state)
+        return stateObj.arrival
+      })
       this.loadedSentReceived = true
     },
     handlePackagesPerShipper(data) {
-      const mappedData = data.reduce(
-        (acc, current) => {
-          acc.shippers.add(current.shipper)
-          acc.data[current.shipper] = isNaN(acc.data[current.shipper])
-            ? 0
-            : acc.data[current.shipper] + 1
-          return acc
-        },
-        {
-          shippers: new Set(),
-          data: {},
-        }
-      )
-      this.dataPackagePerShipper.labels = Array.from(mappedData.shippers)
-      this.dataPackagePerShipper.datasets[0].data = Array.from(
-        mappedData.shippers,
-        shipper => mappedData.data[shipper]
-      )
+      const shippers = Array.from(data.map((d) => d.shipper))
+      this.dataPackagePerShipper.labels = shippers
+      this.dataPackagePerShipper.datasets[0].data = shippers.map((shipper) => {
+        const shipperObj = data.find((obj) => obj.shipper == shipper)
+        return shipperObj.shippedAmount
+      })
       this.loadedPackagePerShipper = true
     },
-    loadData() {
-      fetch('https://my.api.mockaroo.com/dispatch_data.json?key=3fdd6730')
-        .then(data => data.json())
-        .then(data => {
+    loadDataVoivodeship() {
+      fetch('https://my.api.mockaroo.com/voivodeship_stats.json?key=3fdd6730')
+        .then((data) => data.json())
+        .then((data) => {
           this.handleSentReceivedPerMonth(data)
+        })
+    },
+    loadDataShipper() {
+      fetch('https://my.api.mockaroo.com/dispatch_data.json?key=3fdd6730')
+        .then((data) => data.json())
+        .then((data) => {
           this.handlePackagesPerShipper(data)
         })
     },
