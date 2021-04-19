@@ -3,18 +3,32 @@
     <Navbar></Navbar>
     <div class="main content-wrap">
       <div class="content">
-        <h2 class="stats-header">
-          Ilość paczek wysłana i otrzymana w poszczególnych miesiącach
-        </h2>
-        <SentReceivedPerMonth
-          :data="dataSentReceived"
-          :loaded="loadedSentReceived"
-        />
-        <h2 class="stats-header">Ilość paczek przetworzona przez spedytorów</h2>
-        <PackagePerShipper
-          :data="dataPackagePerShipper"
-          :loaded="loadedPackagePerShipper"
-        />
+        <div class="stats-wrap">
+          <h2 class="stats-header">
+            Ilość paczek wysłana i otrzymana w poszczególnych miesiącach
+          </h2>
+          <SentReceivedPerMonth
+            :data="dataSentReceived"
+            :loaded="loadedSentReceived"
+            v-if="loadedSentReceived"
+          />
+          <div v-else>
+            <b-spinner label="Ładowanie..."></b-spinner>
+          </div>
+        </div>
+        <div class="stats-wrap">
+          <h2 class="stats-header">
+            Ilość paczek przetworzona przez spedytorów
+          </h2>
+          <PackagePerShipper
+            :data="dataPackagePerShipper"
+            :loaded="loadedPackagePerShipper"
+            v-if="loadedPackagePerShipper"
+          />
+          <div v-else>
+            <b-spinner label="Ładowanie..."></b-spinner>
+          </div>
+        </div>
       </div>
     </div>
   </section>
