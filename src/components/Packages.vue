@@ -29,7 +29,10 @@
                 :current-page="currentPage"
               >
                 <template #cell(Order)="">
-                  <b-button @click="handleButtonClick" size="md" variant="success"
+                  <b-button
+                    @click="handleButtonClick"
+                    size="md"
+                    variant="success"
                     >More</b-button
                   >
                 </template>
@@ -53,6 +56,7 @@ import Navbar from './Navbar'
 
 export default {
   name: 'Packages',
+  props: ['id'],
   components: {
     Navbar: Navbar,
   },
@@ -64,8 +68,7 @@ export default {
         { key: 'arrival', sortable: true },
         { key: 'state', sortable: true },
         { key: 'shipper', sortable: true },
-        'Order','test'
-        
+        'Order',
       ],
       packages: [],
       filter: '',
@@ -74,7 +77,7 @@ export default {
     }
   },
   watch: {
-    '$route.params.name': function () {
+    '$route.params.name': function() {
       this.showTable()
     },
   },
@@ -84,20 +87,20 @@ export default {
   methods: {
     showTable() {
       fetch('https://my.api.mockaroo.com/dispatch_data.json?key=646a4130')
-        .then((fetchedData) => fetchedData.json())
+        .then(fetchedData => fetchedData.json())
         .then(
-          (fetchedData) => (this.packages = fetchedData.filter(this.checkState))
+          fetchedData => (this.packages = fetchedData.filter(this.checkState))
         )
-        .catch((err) => console.log(err.message))
+        .catch(err => console.log(err.message))
     },
     checkState(item) {
       return this.$route.params.name == 'all'
         ? true
         : item.state == this.$route.params.name
     },
-    handleButtonClick(props){
-      console.log(props)
-    }
+    handleButtonClick() {
+      this.$router.push({ name: 'Package', id: '1' })
+    },
   },
 }
 </script>

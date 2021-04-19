@@ -6,6 +6,7 @@ Vue.use(VueRouter)
 import Index from './components/Index.vue'
 import App from './App.vue'
 import Packages from './components/Packages.vue'
+import Package from './components/Package.vue'
 import Statistics from './components/Statistics.vue'
 import Cost from './components/Cost.vue'
 // Style
@@ -24,6 +25,7 @@ const routes = [
   { path: '/przesyłki/:name', component: Packages },
   { path: '/statystyki', component: Statistics },
   { path: '/koszt', component: Cost },
+  { path: '/przesyłka/:id', component: Package, name: 'Package', props: true },
 ]
 
 const router = new VueRouter({
