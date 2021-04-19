@@ -23,10 +23,17 @@
                 striped
                 hover
                 :items="packages"
+                :fields="fields"
                 :filter="filter"
                 :per-page="perPage"
                 :current-page="currentPage"
-              ></b-table>
+              >
+                <template #cell(Order)="">
+                  <b-button @click="handleButtonClick" size="md" variant="success"
+                    >More</b-button
+                  >
+                </template>
+              </b-table>
               <b-pagination
                 v-if="packages.length > 0"
                 v-model="currentPage"
@@ -46,12 +53,20 @@ import Navbar from './Navbar'
 
 export default {
   name: 'Packages',
-  props: ['posts'],
   components: {
     Navbar: Navbar,
   },
   data() {
     return {
+      fields: [
+        { key: 'package_id', sortable: true },
+        { key: 'dispatch', sortable: true },
+        { key: 'arrival', sortable: true },
+        { key: 'state', sortable: true },
+        { key: 'shipper', sortable: true },
+        'Order','test'
+        
+      ],
       packages: [],
       filter: '',
       perPage: 10,
@@ -59,7 +74,7 @@ export default {
     }
   },
   watch: {
-    '$route.params.name': function() {
+    '$route.params.name': function () {
       this.showTable()
     },
   },
@@ -68,18 +83,21 @@ export default {
   },
   methods: {
     showTable() {
-      fetch('https://my.api.mockaroo.com/dispatch_data/.json?key=646a4130')
-        .then(fetchedData => fetchedData.json())
+      fetch('https://my.api.mockaroo.com/dispatch_data.json?key=646a4130')
+        .then((fetchedData) => fetchedData.json())
         .then(
-          fetchedData => (this.packages = fetchedData.filter(this.checkState))
+          (fetchedData) => (this.packages = fetchedData.filter(this.checkState))
         )
-        .catch(err => console.log(err.message))
+        .catch((err) => console.log(err.message))
     },
     checkState(item) {
       return this.$route.params.name == 'all'
         ? true
         : item.state == this.$route.params.name
     },
+    handleButtonClick(props){
+      console.log(props)
+    }
   },
 }
 </script>
