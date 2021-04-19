@@ -23,10 +23,20 @@
                 striped
                 hover
                 :items="packages"
+                :fields="fields"
                 :filter="filter"
                 :per-page="perPage"
                 :current-page="currentPage"
-              ></b-table>
+              >
+                <template #cell(Order)="">
+                  <b-button
+                    @click="handleButtonClick"
+                    size="md"
+                    variant="success"
+                    >More</b-button
+                  >
+                </template>
+              </b-table>
               <b-pagination
                 v-if="packages.length > 0"
                 v-model="currentPage"
@@ -46,12 +56,20 @@ import Navbar from './Navbar'
 
 export default {
   name: 'Packages',
-  props: ['posts'],
+  props: ['id'],
   components: {
     Navbar: Navbar,
   },
   data() {
     return {
+      fields: [
+        { key: 'package_id', sortable: true },
+        { key: 'dispatch', sortable: true },
+        { key: 'arrival', sortable: true },
+        { key: 'state', sortable: true },
+        { key: 'shipper', sortable: true },
+        'Order',
+      ],
       packages: [],
       filter: '',
       perPage: 10,
@@ -68,7 +86,7 @@ export default {
   },
   methods: {
     showTable() {
-      fetch('https://my.api.mockaroo.com/dispatch_data/.json?key=646a4130')
+      fetch('https://my.api.mockaroo.com/dispatch_data.json?key=646a4130')
         .then(fetchedData => fetchedData.json())
         .then(
           fetchedData => (this.packages = fetchedData.filter(this.checkState))
@@ -79,6 +97,9 @@ export default {
       return this.$route.params.name == 'all'
         ? true
         : item.state == this.$route.params.name
+    },
+    handleButtonClick() {
+      this.$router.push({ name: 'Package', id: '1' })
     },
   },
 }
