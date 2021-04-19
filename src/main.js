@@ -25,7 +25,7 @@ const routes = [
   { path: '/przesyłki/:name', component: Packages },
   { path: '/statystyki', component: Statistics },
   { path: '/koszt', component: Cost },
-  { path: '/przesyłka/:id', component: Package, name: 'Package', props: true },
+  { path: '/przesyłki/zamowienie/:id', component: Package },
 ]
 
 const router = new VueRouter({

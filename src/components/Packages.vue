@@ -56,7 +56,6 @@ import Navbar from './Navbar'
 
 export default {
   name: 'Packages',
-  props: ['id'],
   components: {
     Navbar: Navbar,
   },
@@ -98,8 +97,11 @@ export default {
         ? true
         : item.state == this.$route.params.name
     },
-    handleButtonClick() {
-      this.$router.push({ name: 'Package', id: '1' })
+    handleButtonClick(event) {
+      const id = event.target.parentElement.parentElement.getAttribute(
+        'aria-rowindex'
+      )
+      this.$router.push(`zamowienie/${id}`)
     },
   },
 }
