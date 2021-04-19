@@ -15,9 +15,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 import './styles.css'
-import 'leaflet/dist/leaflet.css';
-
-
+import 'leaflet/dist/leaflet.css'
 
 Vue.config.productionTip = false
 
@@ -33,14 +31,20 @@ const router = new VueRouter({
   mode: 'history',
 })
 
+const animate = () => {
+  const main = document.querySelector('.js-main')
+
+  main.classList.remove('loaded')
+  setTimeout(() => {
+    main.classList.add('loaded')
+  }, 1)
+}
+
 new Vue({
   render: h => h(App),
   router,
   mounted: function() {
-    const main = document.querySelector('.js-main')
-    setTimeout(() => {
-      main.classList.add('loaded')
-    }, 1)
+    animate()
   },
 }).$mount('#app')
 
