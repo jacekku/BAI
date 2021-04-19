@@ -3,24 +3,28 @@
     <Navbar></Navbar>
     <div class="main">
 
-      <h1>Oblisz koszt nadania wysyłki</h1>
-      <div class="container-fluid w-50">
+      <h1>Oblicz koszt nadania wysyłki</h1>
+      <div class="container w-50">
         <br>
         <span style="font-size:20px;">Wpisz dane przesyłki</span>
         <br>
         <br>
           <form>
-            <div class="form-group">
-              <input type="number" min="10" max="200" onKeyDown="return false" class="form-control" v-model="height" placeholder="Wysokość w cm">
+            <div class="form-group text-left">
+              <label for="wys">Wysokość w cm</label>
+              <input type="number" name="wys" min="10" max="200" onKeyDown="return false" class="form-control" v-model="height">
             </div>
-            <div class="form-group">
-              <input type="number" min="10" max="200" onKeyDown="return false" class="form-control" v-model="width" placeholder="Szerokość w cm">
+            <div class="form-group text-left">
+              <label for="szer">Szerokość w cm</label>
+              <input type="number" name="szer" min="10" max="200" onKeyDown="return false" class="form-control" v-model="width">
             </div>
-            <div class="form-group">
-              <input type="number" min="1" max="200" onKeyDown="return false" class="form-control" v-model="depth" placeholder="Głębokość w cm">
+            <div class="form-group text-left">
+              <label for="gle">Głębokość w cm</label>
+              <input type="number" name="gle" min="1" max="200" onKeyDown="return false" class="form-control" v-model="depth">
             </div>
-            <div class="form-group">
-              <input type="number" min="1" max="100" onKeyDown="return false" class="form-control" v-model="weight" placeholder="Waga w kg">
+            <div class="form-group text-left">
+              <label for="wag">Waga w kg</label>
+              <input type="number" name="wag" min="1" max="100" onKeyDown="return false" class="form-control" v-model="weight">
             </div>
             <p><strong>Koszt twojej przesyłki wynosi {{costs().toFixed(2)}} zł.</strong></p>
           
