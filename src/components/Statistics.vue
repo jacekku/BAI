@@ -7,7 +7,7 @@
           <h2 class="stats-header">
             Ilość paczek wysłana i otrzymana w poszczególnych województwach
           </h2>
-          <SentReceivedPerMonth
+          <SentReceivedPerVoivodeship
             :data="dataSentReceived"
             :loaded="loadedSentReceived"
             v-if="loadedSentReceived"
@@ -35,13 +35,13 @@
 </template>
 
 <script>
-import SentReceivedPerMonth from './charts/SentReceivedPerMonth'
+import SentReceivedPerVoivodeship from './charts/SentReceivedPerVoivodeship'
 import PackagePerShipper from './charts/PackagePerShipper'
 import Navbar from './Navbar'
 export default {
   components: {
     Navbar,
-    SentReceivedPerMonth,
+    SentReceivedPerVoivodeship,
     PackagePerShipper,
   },
   mounted() {
