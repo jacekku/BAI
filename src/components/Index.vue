@@ -1,6 +1,5 @@
 <template>
   <section>
-    <Navbar></Navbar>
     <div class="main">
       <h1>Wybierz województwo, aby wyświetlić dane o przesyłkach</h1>
       <Map />
@@ -9,13 +8,11 @@
 </template>
 
 <script>
-import Navbar from './Navbar'
 import Map from './Map'
 
 export default {
   name: 'Index',
   components: {
-    Navbar,
     Map,
   },
 }

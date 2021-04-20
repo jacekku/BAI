@@ -1,6 +1,5 @@
 <template>
   <section>
-    <Navbar></Navbar>
     <div class="main content-wrap">
       <div class="content">
         <div class="stats-wrap">
@@ -37,10 +36,8 @@
 <script>
 import SentReceivedPerVoivodeship from './charts/SentReceivedPerVoivodeship'
 import PackagePerShipper from './charts/PackagePerShipper'
-import Navbar from './Navbar'
 export default {
   components: {
-    Navbar,
     SentReceivedPerVoivodeship,
     PackagePerShipper,
   },
@@ -92,39 +89,39 @@ export default {
   },
   methods: {
     handleSentReceivedPerMonth(data) {
-      const states = Array.from(data.map((d) => d.state))
+      const states = Array.from(data.map(d => d.state))
 
       this.dataSentReceived.labels = states
-      this.dataSentReceived.datasets[0].data = states.map((state) => {
-        const stateObj = data.find((obj) => obj.state == state)
+      this.dataSentReceived.datasets[0].data = states.map(state => {
+        const stateObj = data.find(obj => obj.state == state)
         return stateObj.dispatch
       })
-      this.dataSentReceived.datasets[1].data = states.map((state) => {
-        const stateObj = data.find((obj) => obj.state == state)
+      this.dataSentReceived.datasets[1].data = states.map(state => {
+        const stateObj = data.find(obj => obj.state == state)
         return stateObj.arrival
       })
       this.loadedSentReceived = true
     },
     handlePackagesPerShipper(data) {
-      const shippers = Array.from(data.map((d) => d.shipper))
+      const shippers = Array.from(data.map(d => d.shipper))
       this.dataPackagePerShipper.labels = shippers
-      this.dataPackagePerShipper.datasets[0].data = shippers.map((shipper) => {
-        const shipperObj = data.find((obj) => obj.shipper == shipper)
+      this.dataPackagePerShipper.datasets[0].data = shippers.map(shipper => {
+        const shipperObj = data.find(obj => obj.shipper == shipper)
         return shipperObj.shippedAmount
       })
       this.loadedPackagePerShipper = true
     },
     loadDataVoivodeship() {
       fetch('https://my.api.mockaroo.com/voivodeship_stats.json?key=3fdd6730')
-        .then((data) => data.json())
-        .then((data) => {
+        .then(data => data.json())
+        .then(data => {
           this.handleSentReceivedPerMonth(data)
         })
     },
     loadDataShipper() {
       fetch('https://my.api.mockaroo.com/dispatch_data.json?key=3fdd6730')
-        .then((data) => data.json())
-        .then((data) => {
+        .then(data => data.json())
+        .then(data => {
           this.handlePackagesPerShipper(data)
         })
     },

@@ -9,6 +9,7 @@ import Packages from './components/Packages.vue'
 import Package from './components/Package.vue'
 import Statistics from './components/Statistics.vue'
 import Cost from './components/Cost.vue'
+import Orders from './components/Orders.vue'
 // Style
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
@@ -26,6 +27,7 @@ const routes = [
   { path: '/statystyki', component: Statistics },
   { path: '/koszt', component: Cost },
   { path: '/przesyłki/zamowienie/:id', component: Package },
+  { path: '/zamowienia', component: Orders },
 ]
 
 const router = new VueRouter({
@@ -33,20 +35,20 @@ const router = new VueRouter({
   mode: 'history',
 })
 
-const animate = () => {
-  const main = document.querySelector('.js-main')
+// const animate = () => {
+//   const main = document.querySelector('.js-main')
 
-  main.classList.remove('loaded')
-  setTimeout(() => {
-    main.classList.add('loaded')
-  }, 1)
-}
+//   main.classList.remove('loaded')
+//   setTimeout(() => {
+//     main.classList.add('loaded')
+//   }, 1)
+// }
 
 new Vue({
   render: h => h(App),
   router,
   mounted: function() {
-    animate()
+    // animate()
   },
 }).$mount('#app')
 

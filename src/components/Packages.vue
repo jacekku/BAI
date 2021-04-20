@@ -1,6 +1,5 @@
 <template>
   <section>
-    <Navbar></Navbar>
     <div class="main">
       <div class="container-fluid content-wrap">
         <div class="content">
@@ -52,22 +51,18 @@
 </template>
 
 <script>
-import Navbar from './Navbar'
-
 export default {
   name: 'Packages',
-  components: {
-    Navbar: Navbar,
-  },
+
   data() {
     return {
       fields: [
-        { key: 'package_id', label:'Identyfikator paczki', sortable: true },
-        { key: 'dispatch', label:'Wysłano', sortable: true },
-        { key: 'arrival', label:'Dostarczono', sortable: true },
-        { key: 'state', label:'Województwo odbiorcy', sortable: true },
-        { key: 'shipper', label:'Spedytor', sortable: true },
-        { key:'packageDetails', label:'Szczegóły' }
+        { key: 'package_id', label: 'Identyfikator paczki', sortable: true },
+        { key: 'dispatch', label: 'Wysłano', sortable: true },
+        { key: 'arrival', label: 'Dostarczono', sortable: true },
+        { key: 'state', label: 'Województwo odbiorcy', sortable: true },
+        { key: 'shipper', label: 'Spedytor', sortable: true },
+        { key: 'packageDetails', label: 'Szczegóły' },
       ],
       packages: [],
       filter: '',
@@ -98,9 +93,8 @@ export default {
         : item.state == this.$route.params.name
     },
     handleButtonClick(event) {
-      const id = event.target.parentElement.parentElement.getAttribute(
-        'aria-rowindex'
-      )
+      const id =
+        event.target.parentElement.parentElement.firstElementChild.innerHTML
       this.$router.push(`zamowienie/${id}`)
     },
   },

@@ -28,7 +28,7 @@ a:hover {
 }
 
 .page-wrap {
-  opacity: 0;
+  opacity: unset;
   transition: 0.5s;
 }
 .page-wrap.loaded {
@@ -67,4 +67,27 @@ a:hover {
 
 .stats-header {
   margin: 25px 0 50px 0;
+}
+
+.card-text ul {
+  padding-left: 0;
+}
+
+.cost p {
+  text-decoration: underline;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.navigation {
+  opacity: 1 !important;
+  z-index: 99;
 }

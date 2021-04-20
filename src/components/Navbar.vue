@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="navigation">
     <b-navbar toggleable="lg" type="dark" variant="dark">
       <b-navbar-brand>
         <router-link to="/"
@@ -17,6 +17,9 @@
             ><router-link to="/przesyłki/all"
               >Wszystkie paczki</router-link
             ></b-nav-item
+          >
+          <b-nav-item
+            ><router-link to="/zamowienia">Zamówienia</router-link></b-nav-item
           >
           <b-nav-item
             ><router-link to="/koszt"
