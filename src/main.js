@@ -35,21 +35,7 @@ const router = new VueRouter({
   mode: 'history',
 })
 
-// const animate = () => {
-//   const main = document.querySelector('.js-main')
-
-//   main.classList.remove('loaded')
-//   setTimeout(() => {
-//     main.classList.add('loaded')
-//   }, 1)
-// }
-
 new Vue({
   render: h => h(App),
   router,
-  mounted: function() {
-    // animate()
-  },
 }).$mount('#app')
-
-Vue.use(VueRouter)
