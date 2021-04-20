@@ -28,12 +28,12 @@
                 :per-page="perPage"
                 :current-page="currentPage"
               >
-                <template #cell(Order)="">
+                <template #cell(packageDetails)="">
                   <b-button
                     @click="handleButtonClick"
                     size="md"
-                    variant="success"
-                    >More</b-button
+                    variant="warning"
+                    >Więcej</b-button
                   >
                 </template>
               </b-table>
@@ -62,12 +62,12 @@ export default {
   data() {
     return {
       fields: [
-        { key: 'package_id', sortable: true },
-        { key: 'dispatch', sortable: true },
-        { key: 'arrival', sortable: true },
-        { key: 'state', sortable: true },
-        { key: 'shipper', sortable: true },
-        'Order',
+        { key: 'package_id', label:'Identyfikator paczki', sortable: true },
+        { key: 'dispatch', label:'Wysłano', sortable: true },
+        { key: 'arrival', label:'Dostarczono', sortable: true },
+        { key: 'state', label:'Województwo odbiorcy', sortable: true },
+        { key: 'shipper', label:'Spedytor', sortable: true },
+        { key:'packageDetails', label:'Szczegóły' }
       ],
       packages: [],
       filter: '',
@@ -85,7 +85,7 @@ export default {
   },
   methods: {
     showTable() {
-      fetch('https://my.api.mockaroo.com/dispatch_data.json?key=646a4130')
+      fetch('https://my.api.mockaroo.com/dispatch_data.json?key=de6833d0')
         .then(fetchedData => fetchedData.json())
         .then(
           fetchedData => (this.packages = fetchedData.filter(this.checkState))
